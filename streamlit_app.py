@@ -11,11 +11,13 @@ client = OpenAI(
 )
 
 def get_gpt4_response(prompt):
-    response = openai.Completion.create(
-        model="text-davinci-004",  # Ensure you have access to the GPT-4 model
-        prompt=prompt,
-        max_tokens=150  # Adjust as needed
-    ) return response.choices[0].text.strip()
+  response = openai.Completion.create
+  (
+    model="text-davinci-004",  # Ensure you have access to the GPT-4 model
+    prompt=prompt,
+    max_tokens=150  # Adjust as needed
+  ) 
+  return response.choices[0].text.strip()
 
 idea = st.text_input("What's your idea?")
 st.write("Your idea is ", get_gpt4_response(idea))
