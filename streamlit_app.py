@@ -7,12 +7,15 @@ openai.api_key = os.getenv("sk-proj-Mqh0dXdwdd20ucNt10NIT3BlbkFJ9v5xl2AIhj3PXAyu
 
 # Function to get a response from GPT-4
 def get_gpt4_response(prompt):
-    response = openai.Completion.create(
+    response = openai.ChatCompletion.create(
         model="gpt-4",  # Ensure you have access to the GPT-4 model
-        prompt=prompt,
+        messages=[
+            {"role": "system", "content": "You are a helpful assistant."},
+            {"role": "user", "content": prompt}
+        ],
         max_tokens=150  # Adjust as needed
     )
-    return response.choices[0].text.strip()
+    return response.choices[0].message["content"].strip()
 
 # Streamlit app
 st.title("ChatGPT Interaction with Streamlit")
@@ -23,3 +26,4 @@ if prompt:
     response = get_gpt4_response(prompt)
     st.write("Response from GPT-4:")
     st.write(response)
+
