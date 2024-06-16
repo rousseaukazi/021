@@ -4,4 +4,4 @@ import pandas as pd
 import streamlit as st
 
 idea = st.text_input("What's your idea?")
-st.write("Your idea is ", get_gpt4_response(idea))
+st.write("Your idea is ", idea)
