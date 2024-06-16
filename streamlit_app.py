@@ -13,7 +13,7 @@ client = OpenAI(
 def get_gpt4_response(prompt):
   response = openai.Completion.create
   (
-    model="gpt-3.5-turbo-0613",  # Ensure you have access to the GPT-4 model
+    model="gpt-4o",  # Ensure you have access to the GPT-4 model
     prompt=prompt,
     max_tokens=150  # Adjust as needed
   ) 
