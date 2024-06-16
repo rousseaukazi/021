@@ -16,7 +16,7 @@ def get_gpt4_response(prompt):
         prompt=prompt,
         max_tokens=150  # Adjust as needed
     )
-  return response.choices[0].text.strip()
+    return response.choices[0].text.strip()
 
 idea = st.text_input("What's your idea?")
 st.write("Your idea is ", get_gpt4_response(idea))
