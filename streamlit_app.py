@@ -1,29 +1,11 @@
-import openai
+from openai import OpenAI
 import streamlit as st
 import os
 
-# Set the OpenAI API key from environment variables
-openai.api_key = os.getenv("sk-proj-Mqh0dXdwdd20ucNt10NIT3BlbkFJ9v5xl2AIhj3PXAyupBSx")
+client = OpenAI(
+  organization='org-WOpUWQvB82kuQqU0GO5bX6Nu',
+  project='proj_EXw0srD1epiNHMuCTdGF64Ft',
+)
 
-# Function to get a response from GPT-4
-def get_gpt4_response(prompt):
-    response = openai.ChatCompletion.create(
-        model="gpt-4",  # Ensure you have access to the GPT-4 model
-        messages=[
-            {"role": "system", "content": "You are a helpful assistant."},
-            {"role": "user", "content": prompt}
-        ],
-        max_tokens=150  # Adjust as needed
-    )
-    return response.choices[0].message["content"].strip()
-
-# Streamlit app
-st.title("ChatGPT Interaction with Streamlit")
-st.write("Enter your prompt and get a response from GPT-4:")
 
 prompt = st.text_input("What's your idea?")
-if prompt:
-    response = get_gpt4_response(prompt)
-    st.write("Response from GPT-4:")
-    st.write(response)
-
