@@ -5,19 +5,16 @@ import streamlit as st
 
 from openai import OpenAI
 
-client = OpenAI(
-  organization='org-WOpUWQvB82kuQqU0GO5bX6Nu',
-  project='proj_EXw0srD1epiNHMuCTdGF64Ft',
-)
+client = OpenAI()
 
-def get_gpt4_response(prompt):
-  response = openai.Completion.create
-  (
-    model="gpt-4o",  # Ensure you have access to the GPT-4 model
-    prompt=prompt,
-    max_tokens=150  # Adjust as needed
-  ) 
-  return response.choices[0].text.strip()
+stream = client.chat.completions.create(
+    model="gpt-3.5-turbo",
+    messages=[{"role": "user", "content": "Say this is a test"}],
+    stream=True,
+)
+for chunk in stream:
+    if chunk.choices[0].delta.content is not None:
+        print(chunk.choices[0].delta.content, end="")
 
 idea = st.text_input("What's your idea?")
 st.write("Your idea is ", get_gpt4_response(idea))
