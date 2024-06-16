@@ -3,5 +3,5 @@ import numpy as np
 import pandas as pd
 import streamlit as st
 
-title = st.text_input("Movie title", "Life of Brian")
+title = st.text_input("What's your idea?")
 st.write("The current movie title is", title)
