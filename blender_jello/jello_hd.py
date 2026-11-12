@@ -546,9 +546,9 @@ for (c, n), sx in zip(EYE, (1, -1)):
     for i, a in enumerate((2, 26, 50)):
         dv = side * math.cos(R(a)) + up * math.sin(R(a))
         base = ec + (n * 0.55 + dv).normalized() * 0.090
-        mid = base + dv * 0.035 + n * 0.010
-        tip = base + (side * math.cos(R(a + 24)) + up * math.sin(R(a + 24))) * 0.07 + n * 0.008
-        tube(f'lash{i}', [base, mid, tip], 0.013, M_LASH, radii=[1.0, 0.8, 0.15])
+        mid = base + dv * 0.022 + n * 0.004
+        tip = base + (side * math.cos(R(a + 20)) + up * math.sin(R(a + 20))) * 0.046 - n * 0.004
+        tube(f'lash{i}', [base, mid, tip], 0.008, M_LASH, radii=[1.0, 0.75, 0.2])
     bp = []
     for a in np.linspace(48, 112, 6):
         dv = side * math.cos(R(a)) + up * math.sin(R(a))
