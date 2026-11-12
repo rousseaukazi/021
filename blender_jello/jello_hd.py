@@ -208,7 +208,7 @@ def add_bump(nt, b, scale, strength, dist=0.01):
     nt.links.new(tc.outputs['Object'], n.inputs['Vector']); nt.links.new(n.outputs[0], bp.inputs['Height'])
     nt.links.new(bp.outputs['Normal'], b.inputs['Normal'])
 
-def attr_mat(name, rough=0.9, sheen=0.8, mult=1.0, sss=0.0, coat=0.0, bump=0.0, bscale=300.0):
+def attr_mat(name, rough=0.9, sheen=0.25, mult=1.0, sss=0.0, coat=0.0, bump=0.0, bscale=300.0):
     """Surface material that reads the per-vertex 'col' attribute."""
     m, nt, b = new_mat(name)
     at = nt.nodes.new('ShaderNodeAttribute'); at.attribute_name = 'col'
@@ -232,7 +232,7 @@ def attr_mat(name, rough=0.9, sheen=0.8, mult=1.0, sss=0.0, coat=0.0, bump=0.0, 
 M_FUR, nt, b = new_mat('fur_fibre')
 at = nt.nodes.new('ShaderNodeAttribute'); at.attribute_name = 'col'
 hi_ = nt.nodes.new('ShaderNodeHairInfo')
-mr = nt.nodes.new('ShaderNodeMapRange'); mr.inputs['To Min'].default_value = 0.66; mr.inputs['To Max'].default_value = 1.10
+mr = nt.nodes.new('ShaderNodeMapRange'); mr.inputs['To Min'].default_value = 0.74; mr.inputs['To Max'].default_value = 1.10
 nt.links.new(hi_.outputs['Intercept'], mr.inputs['Value'])
 mx = nt.nodes.new('ShaderNodeMix'); mx.data_type = 'RGBA'; mx.blend_type = 'MULTIPLY'; mx.inputs[0].default_value = 1.0
 nt.links.new(at.outputs['Color'], mx.inputs[6]); nt.links.new(mr.outputs[0], mx.inputs[7])
@@ -357,7 +357,7 @@ def box(name, size, loc, mat, bevel=0.004, rt=(0, 0, 0), char=True):
     return link(o, char)
 
 # ============================================================================ palette
-C_BLUE = hx('#6394DE'); C_NAVY = hx('#2B4578'); C_CUFF = hx('#5585D2'); C_CREAM = hx('#FCF6EC')
+C_BLUE = hx('#76A3EA'); C_NAVY = hx('#2B4578'); C_CUFF = hx('#6693DE'); C_CREAM = hx('#FFFCF5')
 C_SKIN = hx('#E2A869'); C_SKIN_D = hx('#C48A57'); C_SKIN_L = hx('#EBB981'); C_EARIN = hx('#C87E66'); C_DARK = hx('#2E1A10')
 C_PINK = hx('#F6A3B6'); C_BERRY = hx('#DE4F6C'); C_WAF = hx('#E9A548'); C_WAF_D = hx('#C9812B')
 
@@ -546,9 +546,9 @@ for (c, n), sx in zip(EYE, (1, -1)):
     for i, a in enumerate((2, 26, 50)):
         dv = side * math.cos(R(a)) + up * math.sin(R(a))
         base = ec + (n * 0.55 + dv).normalized() * 0.090
-        mid = base + dv * 0.05 + n * 0.012
-        tip = base + (side * math.cos(R(a + 26)) + up * math.sin(R(a + 26))) * 0.105 + n * 0.008
-        tube(f'lash{i}', [base, mid, tip], 0.011, M_LASH, radii=[1.0, 0.8, 0.15])
+        mid = base + dv * 0.035 + n * 0.010
+        tip = base + (side * math.cos(R(a + 24)) + up * math.sin(R(a + 24))) * 0.07 + n * 0.008
+        tube(f'lash{i}', [base, mid, tip], 0.013, M_LASH, radii=[1.0, 0.8, 0.15])
     bp = []
     for a in np.linspace(48, 112, 6):
         dv = side * math.cos(R(a)) + up * math.sin(R(a))
